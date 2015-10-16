@@ -13,8 +13,8 @@
 		<td><a href="/cron/{{ cronjob[0].key.urlsafe() }}">{{ cronjob[0].name }}</a></td>
 		<td>{{ cronjob[1].status }}</td>
 		<td>{{ cronjob[1].duration_str }}</td>
-		<td><a href="/editcron/{{ cronjob[0].key.urlsafe() }}">Edit</a></td>
-		<td><a href="/deletecron/{{ cronjob[0].key.urlsafe() }}">Delete</a></td>
+		<td><a href="/cron/edit/{{ cronjob[0].key.urlsafe() }}">Edit</a></td>
+		<td><a href="/cron/delete/{{ cronjob[0].key.urlsafe() }}">Delete</a></td>
 	</tr>
 {% endfor %}
 </table>

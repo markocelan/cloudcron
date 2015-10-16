@@ -4,6 +4,8 @@ api_version: 1
 threadsafe: true
 
 handlers:
+- url: /callback/.*
+  script: cloudcron.app
 - url: /.*
   script: cloudcron.app
   login: admin

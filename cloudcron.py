@@ -163,12 +163,12 @@ class TestRun(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/addcron', EditCron),
-    ('/editcron/(.+)', EditCron),
-    ('/deletecron/(.+)', DeleteCron),
-    ('/runcron', RunCron),
-    ('/cron/(.+)', ListCronJobs),
+    ('/cron/add', EditCron),
+    ('/cron/edit/(.+)', EditCron),
+    ('/cron/delete/(.+)', DeleteCron),
     ('/cronjob/(.+)', CronJobDetail),
+    ('/cron/run', RunCron),
+    ('/cron/(.+)', ListCronJobs),
     ('/callback/(.+)', CronCallback),
-    ('/testrun', TestRun)
+    ('/testrun', TestRun),
 ])
