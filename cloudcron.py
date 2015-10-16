@@ -36,7 +36,7 @@ class CronJob(ndb.Model):
 	crondefinition = ndb.KeyProperty()
 
 	status_class = ndb.ComputedProperty(lambda self: "info" if self.status == "running" else "success" if self.status == "success" else "danger")
-	duration_str = ndb.ComputedProperty(lambda self: str("None") if self.starttime is None else str(datetime.utcnow() - self.starttime) if self.duration == -1 else str(timedelta(seconds=self.duration)))
+	duration_str = ndb.ComputedProperty(lambda self: str("None") if self.starttime is None else str(timedelta(seconds=self.duration)) if self.duration != -1 else str(datetime.utcnow() - self.starttime) if self.status == "running" else "Not running")
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
@@ -97,8 +97,12 @@ class RunCron(webapp2.RequestHandler):
 					continue
 				cronjob = CronJob(status="running", crondefinition=cron.key, ttltimeout=datetime.utcnow() + timedelta(minutes=cron.ttl))
 				cronjob.put()
-				result = urlfetch.fetch(url=cron.url, headers={"X-Cloudcron-Callback": self.request.application_url + "/callback/" + cronjob.key.urlsafe()})
-				if result.status_code != 200:
+				error = False
+				try:
+					result = urlfetch.fetch(url=cron.url, headers={"X-Cloudcron-Callback": self.request.application_url + "/callback/" + cronjob.key.urlsafe()})
+				except:
+					error = True
+				if error or result.status_code != 200:
 					cronjob.status = "failedtostart"
 					cronjob.put()
 
