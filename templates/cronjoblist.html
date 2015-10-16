@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>{{ crondefinition.name }}</h1>
+<table class="table table-striped">
+	<tr>
+		<th>Start time</th>
+		<th>Status</th>
+		<th>Duration</th>
+	</tr>
+{% for cronjob in cronjobs %}
+	<tr class="{{ cronjob.status_class }}">
+		<td><a href="/cronjob/{{ cronjob.key.urlsafe() }}">{{ cronjob.starttime.strftime('%Y-%m-%d %H:%M:%S') }}</a></td>
+		<td>{{ cronjob.status }}</td>
+		<td>{{ cronjob.duration_str }}</td>
+	</tr>
+{% endfor %}
+</table>
+{% endblock %}

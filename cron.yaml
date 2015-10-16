@@ -1,0 +1,4 @@
+cron:
+  - description: run crons
+    url: /runcron
+    schedule: every 1 minutes

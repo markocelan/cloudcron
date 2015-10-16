@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+<form action="#" method="post">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ crondefinition.name | default("") }}" required>
+  </div>
+  <div class="form-group">
+    <label for="url">Url</label>
+    <input type="url" class="form-control" id="url" name="url" placeholder="Url" value="{{ crondefinition.url | default("") }}" required>
+  </div>
+  <div class="form-group">
+    <label for="period">Period</label>
+    <input type="number" class="form-control" id="period" name="period" value="{{ crondefinition.period | default("1") }}">
+  </div>
+  <div class="form-group">
+    <label for="ttl">Ttl</label>
+    <input type="number" class="form-control" id="ttl" name="ttl" value="{{ crondefinition.ttl | default("10") }}">
+  </div>
+  <button type="submit" class="btn btn-default">Save</button>
+</form>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>
+{% endblock %}

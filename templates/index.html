@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<table class="table table-striped">
+	<tr>
+		<th>Name</th>
+		<th>Status</th>
+		<th>Duration</th>
+		<th></th>
+		<th></th>
+	</tr>
+{% for cronjob in cronjobs %}
+	<tr class="{{ cronjob[1].status_class }}">
+		<td><a href="/cron/{{ cronjob[0].key.urlsafe() }}">{{ cronjob[0].name }}</a></td>
+		<td>{{ cronjob[1].status }}</td>
+		<td>{{ cronjob[1].duration_str }}</td>
+		<td><a href="/editcron/{{ cronjob[0].key.urlsafe() }}">Edit</a></td>
+		<td><a href="/deletecron/{{ cronjob[0].key.urlsafe() }}">Delete</a></td>
+	</tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>{{ crondefinition.name }}</h1>
+<p>
+<b>Start time:</b> {{ cronjob.starttime.strftime('%Y-%m-%d %H:%M:%S') }}<br>
+<b>Duration:</b> {{ cronjob.duration_str }}<br>
+</p>
+<div class="alert alert-{{ cronjob.status_class }}">
+	Status: {{ cronjob.status }}
+</div>
+{% if cronjob.output %}
+	<b>Output:</b>
+	<div class="well">
+		{{ cronjob.output }}
+	</div>
+{% endif %}
+{% endblock %}
