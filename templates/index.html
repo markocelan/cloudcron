@@ -12,7 +12,7 @@
 {% for cronjob in cronjobs %}
 	<tr class="{{ cronjob[1].status_class }}">
 		<td><a href="/cron/{{ cronjob[0].key.urlsafe() }}">{{ cronjob[0].name }}</a></td>
-		<td>{{ cronjob[1].starttime.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+		<td>{{ cronjob[1].starttime.strftime('%Y-%m-%d %H:%M:%S') if cronjob[1] != None else "No runs yet" }}</td>
 		<td>{{ cronjob[1].status }}</td>
 		<td>{{ cronjob[1].duration_str }}</td>
 		<td><a href="/cron/edit/{{ cronjob[0].key.urlsafe() }}">Edit</a></td>
